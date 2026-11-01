@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The T-Shirt Project | Economics of Globalization</title>
+<style>
+:root{--ink:#17243a;--muted:#64748b;--paper:#f6f7fb;--white:#fff;--blue:#3157d5;--teal:#0f9d91;--gold:#f3b43f;--coral:#ed735f;--line:#e4e8f0;--shadow:0 12px 35px rgba(27,43,77,.09)}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--blue)}button{font:inherit;cursor:pointer}
+.hero{background:linear-gradient(125deg,#18264a,#3157d5 65%,#1ba99b);color:white;padding:42px 22px 35px}
+.wrap{max-width:1120px;margin:auto}.eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:.76rem;font-weight:800;opacity:.82}
+h1{font-size:clamp(2.2rem,6vw,4.1rem);line-height:1.02;margin:12px 0;max-width:800px;letter-spacing:-.045em}
+.hero p{max-width:720px;font-size:1.1rem;color:#e5ecff}
+.question{margin-top:25px;padding:18px 20px;border:1px solid #ffffff55;background:#ffffff16;border-radius:18px;max-width:850px}
+.question strong{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:#c9d8ff}
+.question span{display:block;font-size:clamp(1.15rem,2.8vw,1.7rem);font-weight:850;line-height:1.25;margin-top:5px}
+main{max-width:1120px;margin:26px auto;padding:0 18px 70px}
+.progress-card{background:white;border:1px solid var(--line);border-radius:18px;padding:16px 20px;box-shadow:var(--shadow);display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.progress-copy{min-width:160px;font-weight:800}.progress-track{height:10px;background:#e9edf6;border-radius:20px;overflow:hidden;flex:1;min-width:150px}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--teal),#72c9a7);transition:width .25s}
+#progressText{font-size:.88rem;color:var(--muted);font-weight:700}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:20px 0 12px;position:sticky;top:0;background:var(--paper);z-index:5}
+.tab{border:1px solid var(--line);background:white;border-radius:999px;padding:11px 17px;font-weight:800;color:#475569;white-space:nowrap;transition:.2s}
+.tab[aria-selected=true]{background:var(--ink);color:white;border-color:var(--ink);box-shadow:0 5px 15px #17243a22}
+.panel{display:none}.panel.active{display:block;animation:fade .25s ease}@keyframes fade{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:none}}
+.panel-head{display:flex;align-items:flex-start;gap:16px;margin:18px 0 20px}.number{width:54px;height:54px;flex:none;border-radius:17px;display:grid;place-items:center;color:white;font-weight:900;font-size:1.35rem;background:var(--accent)}
+.panel-head h2{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.1;margin:0;letter-spacing:-.035em}.panel-head p{margin:6px 0 0;color:var(--muted);font-weight:650}
+.grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.85fr);gap:18px;align-items:start}
+.card{background:white;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);margin-bottom:18px}
+.card h3{margin:0 0 12px;font-size:1.18rem}.reading p{margin:0 0 14px}.reading p:last-child{margin-bottom:0}
+.video-card{background:#111c32;color:white;border:0}.video-card h3{color:white}.video-card p{color:#d3def4;font-size:.92rem}
+.video-frame{position:relative;width:100%;aspect-ratio:16/9;background:#243653;border-radius:12px;overflow:hidden}
+.video-frame iframe{width:100%;height:100%;border:0;background:#243653}
+.video-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;padding:20px;color:white}
+.play{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#ffffff22;font-size:1.4rem;margin-bottom:10px}
+.video-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:13px}.video-links a{color:#c9d8ff;font-weight:750;font-size:.9rem}
+.vocab-list{display:grid;gap:10px}.vocab{border:1px solid var(--line);border-radius:12px;overflow:hidden}.vocab button{border:0;background:#f8faff;width:100%;padding:12px 14px;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:800;color:var(--ink)}.vocab button span:last-child{color:var(--blue);font-size:1.2rem}.definition{display:none;padding:0 14px 13px;color:#475569;font-size:.94rem}.vocab.open .definition{display:block}
+.questions{counter-reset:q;display:grid;gap:11px}.q{border:1px solid var(--line);border-radius:12px;padding:13px 14px;background:#fff}.q label{display:flex;gap:10px;align-items:flex-start;font-weight:650}.q input{margin-top:6px;accent-color:var(--teal);transform:scale(1.15)}
+.evidence{background:#fff8e9;border:1px solid #f4dfb5;border-radius:14px;padding:15px 17px}.evidence strong{color:#8a5a08}.evidence p{margin:5px 0 0;color:#684e25;font-size:.94rem}
+.next-row{display:flex;justify-content:space-between;gap:10px;margin:18px 0 28px}.next-row button,.primary{border:0;border-radius:12px;background:var(--blue);color:white;padding:12px 18px;font-weight:800}.next-row button.secondary{background:#e8edf8;color:var(--ink)}
+.final-section{margin-top:35px}.final-title{font-size:2rem;letter-spacing:-.03em;margin:0}.final-intro{color:var(--muted);max-width:780px}
+.category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.category{border-radius:15px;padding:17px;background:#fff;border:1px solid var(--line)}.category h3{margin:0 0 8px}.category p{margin:0;color:var(--muted);font-size:.92rem}
+textarea{width:100%;min-height:120px;border:1px solid #cfd7e5;border-radius:12px;padding:13px;font:inherit;resize:vertical;background:#fbfcff;color:var(--ink)}textarea:focus{outline:3px solid #3157d522;border-color:var(--blue)}
+.field{margin:15px 0}.field label{font-weight:800;display:block;margin-bottom:7px}.final-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.outline{border:1px solid var(--line);background:white;color:var(--ink);border-radius:12px;padding:11px 16px;font-weight:800}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:28px 12px}
+.small{font-size:.85rem;color:var(--muted)}.tag{display:inline-block;border-radius:999px;background:#edf2ff;color:#2949b1;padding:4px 10px;font-size:.76rem;font-weight:850;margin-bottom:10px}
+@media(max-width:800px){.grid{grid-template-columns:1fr}.category-grid{grid-template-columns:1fr}.hero{padding-top:32px}.tabs{margin:0 -18px;padding-left:18px;padding-right:18px}.panel-head{margin-top:12px}}
+@media print{.hero{background:#fff;color:#111;padding:15px}.hero p{color:#333}.tabs,.progress-card,.video-card,.next-row,.final-actions,footer{display:none!important}.panel{display:block!important;page-break-before:always}.card{box-shadow:none;break-inside:avoid}body{background:#fff}}
+</style>
+</head>
+<body>
+<header class="hero">
+ <div class="wrap">
+  <div class="eyebrow">A student investigation · Economics · NYC</div>
+  <h1>The T-Shirt Project</h1>
+  <p>One ordinary T-shirt. A surprisingly complicated journey around the world. Follow the cotton, machines, workers, shipping, and consumers behind the global economy.</p>
+  <div class="question"><strong>Your big question</strong><span>Did globalization HELP or HARM people, the environment, and the economy in this clip?</span></div>
+ </div>
+</header>
+<main>
+ <section class="progress-card" aria-label="Reading progress">
+  <div class="progress-copy">Your investigation</div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="progressText">0 of 5 readings completed</div>
+ </section>
+ <nav class="tabs" role="tablist" aria-label="Reading chapters">
+  <button class="tab" role="tab" aria-selected="true" aria-controls="cotton" id="tab-cotton" data-tab="cotton">🌱 1. Cotton</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="machines" id="tab-machines" data-tab="machines">⚙️ 2. Machines</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="people" id="tab-people" data-tab="people">🧵 3. People</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="boxes" id="tab-boxes" data-tab="boxes">🚢 4. Boxes</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="you" id="tab-you" data-tab="you">🛍️ 5. You</button>
+  <button class="tab" role="tab" aria-selected="false" aria-controls="final" id="tab-final" data-tab="final">✍️ Final Challenge</button>
+ </nav>
+
+ <section class="panel active" id="cotton" role="tabpanel" aria-labelledby="tab-cotton" style="--accent:#219b79">
+  <div class="panel-head"><div class="number">01</div><div><h2>Cotton: Where does the journey begin?</h2><p>Natural resources · Agriculture · Productivity</p></div></div>
+  <div class="grid">
+   <div>
+    <article class="card reading"><span class="tag">READ</span><h3>One farmer. A shocking number of T-shirts.</h3>
+     <p>A simple T-shirt begins with cotton, an agricultural product grown in different parts of the world. However, the country where cotton is grown is not necessarily the country where the shirt is manufactured.</p>
+     <p>In NPR's investigation, much of the cotton used for its T-shirts came from the United States. American cotton farmers have become highly productive because they use advanced machinery, improved seeds, and technology. These innovations allow farmers to produce large amounts of cotton with fewer workers.</p>
+     <p>This is an example of how globalization connects different economies. American farmers can grow cotton and sell it to manufacturers in other countries. This creates business opportunities and allows countries to specialize in the products they can produce efficiently.</p>
+     <p>However, there are also disadvantages. Large-scale cotton farming requires significant amounts of water, land, and energy. The use of pesticides and fertilizers can affect surrounding ecosystems. Additionally, American cotton farmers receive government assistance through subsidies and other programs, which can influence international competition.</p>
+     <p>Globalization allows businesses to purchase materials from around the world, but it also means that the environmental consequences of production can affect communities far from where the final product is sold.</p>
+    </article>
+    <article class="card"><h3>💬 Think like an economist: Reading questions</h3><div class="questions">
+     <div class="q"><label><input type="checkbox">How does globalization benefit American cotton farmers? Use evidence from the reading.</label></div>
+     <div class="q"><label><input type="checkbox">How might increased cotton production harm the environment?</label></div>
+     <div class="q"><label><input type="checkbox">How does specialization allow countries to benefit from international trade?</label></div>
+     <div class="q"><label><input type="checkbox">Do government subsidies help or harm the global economy? Explain your reasoning.</label></div>
+     <div class="q"><label><input type="checkbox">Did globalization HELP or HARM people, the environment, or the economy in this stage? Identify one benefit and one cost.</label></div>
+    </div></article>
+    <div class="evidence"><strong>🔎 Evidence to save for your final argument</strong><p>Possible benefits: agricultural productivity, business opportunities, international trade. Possible costs: water consumption, pesticides, environmental damage, and competition affected by subsidies.</p></div>
+   </div>
+   <aside>
+    <article class="card video-card"><h3>🎬 Watch the original NPR chapter</h3><p>Watch the Cotton chapter on NPR. If the embedded page does not load, use the button below to open it directly.</p>
+     <div class="video-frame"><iframe title="NPR Planet Money Makes a T-Shirt — Cotton chapter" src="https://apps.npr.org/tshirt/#/cotton" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+     <div class="video-links"><a href="https://apps.npr.org/tshirt/#/cotton" target="_blank" rel="noopener">Open Cotton on NPR ↗</a><a href="https://apps.npr.org/tshirt/#/title" target="_blank" rel="noopener">Open full project ↗</a></div>
+    </article>
+    <article class="card"><h3>📚 Essential vocabulary</h3><p class="small">Tap each word to reveal its meaning.</p><div class="vocab-list">
+     <div class="vocab"><button type="button">Globalization <span>＋</span></button><div class="definition">The growing connection between countries through trade, business, technology, and communication.</div></div>
+     <div class="vocab"><button type="button">Natural resources <span>＋</span></button><div class="definition">Materials found in nature that people use to produce goods and services.</div></div>
+     <div class="vocab"><button type="button">Productivity <span>＋</span></button><div class="definition">The amount of goods or services produced using available resources.</div></div>
+     <div class="vocab"><button type="button">Specialization <span>＋</span></button><div class="definition">When a country, business, or individual focuses on producing something they can make efficiently.</div></div>
+     <div class="vocab"><button type="button">Subsidy <span>＋</span></button><div class="definition">Financial assistance provided by a government to help a business or industry.</div></div>
+     <div class="vocab"><button type="button">Environmental impact <span>＋</span></button><div class="definition">The effect human activities have on the natural environment.</div></div>
+    </div></article>
+   </aside>
+  </div>
+  <div class="next-row"><span></span><button data-next="machines">Next: Machines →</button></div>
+ </section>
+
+ <section class="panel" id="machines" role="tabpanel" aria-labelledby="tab-machines" style="--accent:#5270d9">
+  <div class="panel-head"><div class="number">02</div><div><h2>Machines: Technology and the changing world of work</h2><p>Automation · Capital investment · Efficiency</p></div></div>
+  <div class="grid"><div>
+   <article class="card reading"><span class="tag">READ</span><h3>Sucked up, laid down, and twisted</h3>
+    <p>After cotton is harvested, it must be transformed into yarn before it can become fabric. This process requires specialized machinery, skilled workers, electricity, and factories.</p>
+    <p>NPR followed the production of its T-shirt to a spinning factory in Indonesia. The factory used expensive machinery capable of operating almost continuously and producing consistent, high-quality yarn.</p>
+    <p>This demonstrates the importance of capital investment. Businesses invest in machinery and technology because they want to produce goods more quickly and at a lower cost.</p>
+    <p>Globalization allows companies to invest in factories in different countries and take advantage of local resources, labor, and technology. In Indonesia, manufacturers can produce yarn for international clothing companies, creating jobs and business opportunities.</p>
+    <p>However, technology can also create challenges. When machines perform tasks previously completed by people, companies may need fewer workers. This is called automation. Some workers may lose their jobs or need additional training to work with newer technology.</p>
+    <p>There are also environmental concerns. Factories require electricity, and depending on how that electricity is generated, manufacturing can contribute to air pollution and greenhouse gas emissions.</p>
+    <p>Globalization can make production more efficient and affordable, but we must also consider who benefits from these changes and who may be negatively affected.</p>
+   </article>
+   <article class="card"><h3>💬 Think like an economist: Reading questions</h3><div class="questions">
+    <div class="q"><label><input type="checkbox">How does investment in machinery help businesses involved in globalization?</label></div>
+    <div class="q"><label><input type="checkbox">How can automation help the economy but potentially harm workers?</label></div>
+    <div class="q"><label><input type="checkbox">Why might a company manufacture products in Indonesia instead of New York City?</label></div>
+    <div class="q"><label><input type="checkbox">What environmental problems might result from increased global manufacturing?</label></div>
+    <div class="q"><label><input type="checkbox">Does technological progress automatically improve people's lives? Explain with examples.</label></div>
+    <div class="q"><label><input type="checkbox">Did globalization HELP or HARM people, the environment, or the economy in this stage? Use evidence on both sides.</label></div>
+   </div></article>
+   <div class="evidence"><strong>🔎 Evidence to save for your final argument</strong><p>Possible benefits: lower production costs, increased efficiency, manufacturing opportunities. Possible costs: job displacement, need for new skills, energy consumption, and factory pollution.</p></div>
+  </div><aside>
+   <article class="card video-card"><h3>🎬 Watch the original NPR chapter</h3><p>Watch the Machines chapter on NPR. If needed, open the chapter directly.</p><div class="video-frame"><iframe title="NPR Planet Money Makes a T-Shirt — Machines chapter" src="https://apps.npr.org/tshirt/#/machines" loading="lazy" allow="autoplay; fullscreen; picture-in-picture"></iframe></div><div class="video-links"><a href="https://apps.npr.org/tshirt/#/machines" target="_blank" rel="noopener">Open Machines on NPR ↗</a></div></article>
+   <article class="card"><h3>📚 Essential vocabulary</h3><p class="small">Tap each word to reveal its meaning.</p><div class="vocab-list">
+    <div class="vocab"><button>Capital investment <span>＋</span></button><div class="definition">Money spent by a business on equipment, machinery, buildings, or technology.</div></div>
+    <div class="vocab"><button>Automation <span>＋</span></button><div class="definition">The use of machines or technology to complete tasks previously performed by people.</div></div>
+    <div class="vocab"><button>Efficiency <span>＋</span></button><div class="definition">Producing goods or services while using fewer resources or reducing waste.</div></div>
+    <div class="vocab"><button>Labor <span>＋</span></button><div class="definition">The physical and mental work people contribute to production.</div></div>
+    <div class="vocab"><button>Manufacturing <span>＋</span></button><div class="definition">The process of turning raw materials into finished products.</div></div>
+    <div class="vocab"><button>Opportunity cost <span>＋</span></button><div class="definition">The next-best alternative given up when making a decision.</div></div>
+   </div></article>
+  </aside></div>
+  <div class="next-row"><button class="secondary" data-prev="cotton">← Cotton</button><button data-next="people">Next: People →</button></div>
+ </section>
+
+ <section class="panel" id="people" role="tabpanel" aria-labelledby="tab-people" style="--accent:#e17b56">
+  <div class="panel-head"><div class="number">03</div><div><h2>People: Who makes our clothes?</h2><p>Labor markets · Wages · Working conditions</p></div></div>
+  <div class="grid"><div>
+   <article class="card reading"><span class="tag">READ</span><h3>The lives of the workers who made our shirts</h3>
+    <p>A T-shirt is not produced by machines alone. Thousands of workers around the world contribute their labor to the clothing industry.</p>
+    <p>NPR's investigation followed garment workers in Bangladesh, including women who worked long hours in factories to support their families. These workers played an essential role in producing clothing for consumers in wealthier countries.</p>
+    <p>Globalization creates connections between workers in developing countries and businesses in wealthier countries. Clothing companies often choose locations where labor costs are relatively low. This allows businesses to reduce expenses and sell products at competitive prices.</p>
+    <p>For workers in Bangladesh, garment manufacturing can provide employment opportunities, income, and a chance to support their families. The clothing industry has also created important export opportunities for the country's economy.</p>
+    <p>However, low wages and difficult working conditions can create serious problems. Some workers face long hours, limited workplace protections, and unsafe factories.</p>
+    <p>The 2013 Rana Plaza factory collapse in Bangladesh killed more than 1,100 people and exposed serious safety problems in the garment industry. The disaster led to international attention, protests, and pressure for better workplace conditions.</p>
+    <p>This raises an important question: If globalization creates jobs and lowers clothing prices but workers face unsafe conditions and low wages, is globalization helping or harming people?</p>
+   </article>
+   <article class="card"><h3>💬 Think like an economist: Reading questions</h3><div class="questions">
+    <div class="q"><label><input type="checkbox">How has globalization created employment opportunities for workers in Bangladesh?</label></div>
+    <div class="q"><label><input type="checkbox">Why do international companies often choose countries with lower wages?</label></div>
+    <div class="q"><label><input type="checkbox">How can globalization benefit clothing companies and consumers while potentially harming factory workers?</label></div>
+    <div class="q"><label><input type="checkbox">What does the Rana Plaza disaster reveal about the possible human costs of globalization?</label></div>
+    <div class="q"><label><input type="checkbox">Should companies be responsible for the safety and wages of workers in the countries where they manufacture products? Explain.</label></div>
+    <div class="q"><label><input type="checkbox">Overall, did globalization HELP or HARM people in this part of the T-shirt's journey? Use evidence for both perspectives.</label></div>
+   </div></article>
+   <div class="evidence"><strong>🔎 Evidence to save for your final argument</strong><p>Possible benefits: employment, income, export growth, opportunities for families. Possible costs: low wages, unsafe working conditions, exploitation, and workplace disasters.</p></div>
+  </div><aside>
+   <article class="card video-card"><h3>🎬 Watch the original NPR chapter</h3><p>Watch the People chapter on NPR. If needed, open the chapter directly.</p><div class="video-frame"><iframe title="NPR Planet Money Makes a T-Shirt — People chapter" src="https://apps.npr.org/tshirt/#/people" loading="lazy" allow="autoplay; fullscreen; picture-in-picture"></iframe></div><div class="video-links"><a href="https://apps.npr.org/tshirt/#/people" target="_blank" rel="noopener">Open People on NPR ↗</a></div></article>
+   <article class="card"><h3>📚 Essential vocabulary</h3><p class="small">Tap each word to reveal its meaning.</p><div class="vocab-list">
+    <div class="vocab"><button>Labor market <span>＋</span></button><div class="definition">The system where employers seek workers and people offer their skills and labor.</div></div>
+    <div class="vocab"><button>Wages <span>＋</span></button><div class="definition">Money workers receive for performing their jobs.</div></div>
+    <div class="vocab"><button>Minimum wage <span>＋</span></button><div class="definition">The lowest hourly pay employers are legally allowed to provide.</div></div>
+    <div class="vocab"><button>Working conditions <span>＋</span></button><div class="definition">The environment, safety, hours, and treatment employees experience at work.</div></div>
+    <div class="vocab"><button>Exports <span>＋</span></button><div class="definition">Goods and services produced in one country and sold to another country.</div></div>
+    <div class="vocab"><button>Labor rights <span>＋</span></button><div class="definition">Legal protections that help ensure workers receive fair treatment and safe working conditions.</div></div>
+   </div></article>
+  </aside></div>
+  <div class="next-row"><button class="secondary" data-prev="machines">← Machines</button><button data-next="boxes">Next: Boxes →</button></div>
+ </section>
+
+ <section class="panel" id="boxes" role="tabpanel" aria-labelledby="tab-boxes" style="--accent:#398ab7">
+  <div class="panel-head"><div class="number">04</div><div><h2>Boxes: How does a T-shirt travel around the world?</h2><p>International trade · Transportation · Supply chains</p></div></div>
+  <div class="grid"><div>
+   <article class="card reading"><span class="tag">READ</span><h3>The unsung innovation at the heart of the global economy</h3>
+    <p>A T-shirt may look like a simple product, but its journey from raw material to retail store can involve several countries.</p>
+    <p>NPR's investigation demonstrated how one T-shirt could begin with cotton grown in the United States, be transformed into yarn in Indonesia, and be assembled into a finished garment in Bangladesh before being shipped to the United States.</p>
+    <p>How can businesses afford to move products across such great distances? One important innovation was the standardized shipping container. Before containers became widely used, workers had to load and unload individual products and packages from ships. This process was expensive and time-consuming.</p>
+    <p>Standardized containers made shipping faster, more efficient, and less expensive. Products could be transferred between ships, trains, and trucks without being individually repackaged.</p>
+    <p>Globalization expanded international trade by making it easier for companies to purchase materials and manufacture products in different countries. Businesses could reduce costs, increase profits, and sell products to customers around the world. Consumers also benefit because international trade makes a wider variety of products available, often at lower prices.</p>
+    <p>However, shipping products across oceans and continents requires fuel and creates greenhouse gas emissions. International transportation can contribute to climate change and air pollution. Additionally, countries and businesses can become dependent on complicated global supply chains. Disruptions to transportation or manufacturing can delay products and increase costs.</p>
+    <p>The Port of New York and New Jersey is an important gateway for international trade. Products arriving through the region eventually travel to warehouses, stores, and consumers throughout the metropolitan area.</p>
+    <p>Globalization makes international trade possible on a massive scale, but the economic benefits must be considered alongside the environmental consequences.</p>
+   </article>
+   <article class="card"><h3>💬 Think like an economist: Reading questions</h3><div class="questions">
+    <div class="q"><label><input type="checkbox">How does globalization make it easier for companies to manufacture products in different countries?</label></div>
+    <div class="q"><label><input type="checkbox">How do shipping containers help businesses and consumers?</label></div>
+    <div class="q"><label><input type="checkbox">How does international trade benefit the economy?</label></div>
+    <div class="q"><label><input type="checkbox">How can global transportation harm the environment?</label></div>
+    <div class="q"><label><input type="checkbox">What risks do countries face when they depend heavily on global supply chains?</label></div>
+    <div class="q"><label><input type="checkbox">Does globalization create more economic benefits than environmental costs in international shipping? Defend your answer.</label></div>
+    <div class="q"><label><input type="checkbox">Based on international transportation and trade, did globalization HELP or HARM people, the environment, or the economy?</label></div>
+   </div></article>
+   <div class="evidence"><strong>🔎 Evidence to save for your final argument</strong><p>Possible benefits: lower shipping costs, affordable products, international business, greater product availability. Possible costs: greenhouse gas emissions, pollution, and dependence on global supply chains.</p></div>
+  </div><aside>
+   <article class="card video-card"><h3>🎬 Watch the original NPR chapter</h3><p>Watch the Boxes chapter on NPR. If needed, open the chapter directly.</p><div class="video-frame"><iframe title="NPR Planet Money Makes a T-Shirt — Boxes chapter" src="https://apps.npr.org/tshirt/#/boxes" loading="lazy" allow="autoplay; fullscreen; picture-in-picture"></iframe></div><div class="video-links"><a href="https://apps.npr.org/tshirt/#/boxes" target="_blank" rel="noopener">Open Boxes on NPR ↗</a></div></article>
+   <article class="card"><h3>📚 Essential vocabulary</h3><p class="small">Tap each word to reveal its meaning.</p><div class="vocab-list">
+    <div class="vocab"><button>International trade <span>＋</span></button><div class="definition">The buying and selling of goods and services between countries.</div></div>
+    <div class="vocab"><button>Global supply chain <span>＋</span></button><div class="definition">The network of people, businesses, and countries involved in producing and delivering a product.</div></div>
+    <div class="vocab"><button>Imports <span>＋</span></button><div class="definition">Goods and services purchased from another country.</div></div>
+    <div class="vocab"><button>Exports <span>＋</span></button><div class="definition">Goods and services sold to another country.</div></div>
+    <div class="vocab"><button>Transportation costs <span>＋</span></button><div class="definition">The expenses involved in moving goods from one location to another.</div></div>
+    <div class="vocab"><button>Greenhouse gas emissions <span>＋</span></button><div class="definition">Gases released into the atmosphere that contribute to global warming.</div></div>
+    <div class="vocab"><button>Interdependence <span>＋</span></button><div class="definition">When countries or businesses depend on one another for resources, products, or services.</div></div>
+   </div></article>
+  </aside></div>
+  <div class="next-row"><button class="secondary" data-prev="people">← People</button><button data-next="you">Next: You →</button></div>
+ </section>
+
+ <section class="panel" id="you" role="tabpanel" aria-labelledby="tab-you" style="--accent:#b17a31">
+  <div class="panel-head"><div class="number">05</div><div><h2>You: The consumer and the true cost of a T-shirt</h2><p>Supply and demand · Consumer choices · Externalities</p></div></div>
+  <div class="grid"><div>
+   <article class="card reading"><span class="tag">READ</span><h3>Where our shirt starts and ends — and everyone in between</h3>
+    <p>After cotton is grown, yarn is manufactured, workers assemble the clothing, and finished products are shipped, the T-shirt finally reaches the consumer.</p>
+    <p>But what determines the price a customer pays? Businesses consider many factors, including the cost of raw materials, labor, transportation, advertising, and distribution. They also consider how much consumers are willing to pay.</p>
+    <p>This is where supply and demand become important. If demand for a particular T-shirt increases while supply remains limited, its price may rise. If consumers lose interest or businesses produce too many shirts, prices may fall.</p>
+    <p>Globalization has helped make clothing more affordable and accessible. Consumers in New York City can purchase shirts produced in countries around the world, often at relatively low prices. This provides more choices and allows families to spend less money on clothing.</p>
+    <p>However, the price displayed in a store does not necessarily represent the full cost of producing the shirt. Pollution from factories, unsafe working conditions, and environmental damage may create costs that are not reflected in the retail price. Economists call these costs negative externalities.</p>
+    <p>Consumers also contribute to the problem through fast fashion. When clothing is inexpensive and easy to replace, people may purchase more items than they need and throw them away more frequently. This creates textile waste and increases demand for new production.</p>
+    <p>Consumers have choices. They can purchase inexpensive clothing, buy secondhand products, or support companies that invest in better labor and environmental practices. Each purchase sends a signal to businesses about what products people want.</p>
+    <p>Ultimately, globalization connects consumers to workers and environments around the world. The question is whether the benefits of inexpensive clothing and greater consumer choice outweigh the costs to people and the planet.</p>
+   </article>
+   <article class="card"><h3>💬 Think like an economist: Reading questions</h3><div class="questions">
+    <div class="q"><label><input type="checkbox">How has globalization benefited consumers in New York City?</label></div>
+    <div class="q"><label><input type="checkbox">Why might inexpensive clothing encourage people to purchase more than they need?</label></div>
+    <div class="q"><label><input type="checkbox">What are two negative externalities associated with producing and consuming inexpensive clothing?</label></div>
+    <div class="q"><label><input type="checkbox">How do consumer choices influence businesses and the global economy?</label></div>
+    <div class="q"><label><input type="checkbox">Can consumers benefit economically from globalization while contributing to environmental harm? Explain.</label></div>
+    <div class="q"><label><input type="checkbox">Should consumers pay more for clothing if it means better wages and safer working conditions? Why or why not?</label></div>
+    <div class="q"><label><input type="checkbox">Based on the consumer experience, did globalization HELP or HARM people, the environment, or the economy? Use evidence.</label></div>
+   </div></article>
+   <div class="evidence"><strong>🔎 Evidence to save for your final argument</strong><p>Possible benefits: affordable clothing, greater consumer choice, access to products. Possible costs: fast fashion, textile waste, pollution, and hidden social and environmental costs.</p></div>
+  </div><aside>
+   <article class="card video-card"><h3>🎬 Watch the original NPR chapter</h3><p>Watch the You chapter on NPR. If needed, open the chapter directly.</p><div class="video-frame"><iframe title="NPR Planet Money Makes a T-Shirt — You chapter" src="https://apps.npr.org/tshirt/#/you" loading="lazy" allow="autoplay; fullscreen; picture-in-picture"></iframe></div><div class="video-links"><a href="https://apps.npr.org/tshirt/#/you" target="_blank" rel="noopener">Open You on NPR ↗</a></div></article>
+   <article class="card"><h3>📚 Essential vocabulary</h3><p class="small">Tap each word to reveal its meaning.</p><div class="vocab-list">
+    <div class="vocab"><button>Consumer <span>＋</span></button><div class="definition">A person who purchases goods and services.</div></div>
+    <div class="vocab"><button>Supply <span>＋</span></button><div class="definition">The amount of a product that businesses are willing and able to sell.</div></div>
+    <div class="vocab"><button>Demand <span>＋</span></button><div class="definition">The amount of a product consumers are willing and able to purchase.</div></div>
+    <div class="vocab"><button>Negative externality <span>＋</span></button><div class="definition">A cost of producing or consuming a product that affects people who are not directly involved in the transaction.</div></div>
+    <div class="vocab"><button>Fast fashion <span>＋</span></button><div class="definition">Inexpensive clothing produced quickly to follow changing fashion trends.</div></div>
+    <div class="vocab"><button>Consumer behavior <span>＋</span></button><div class="definition">The decisions people make when purchasing goods and services.</div></div>
+    <div class="vocab"><button>Textile waste <span>＋</span></button><div class="definition">Clothing and fabric that are thrown away instead of reused or recycled.</div></div>
+   </div></article>
+  </aside></div>
+  <div class="next-row"><button class="secondary" data-prev="boxes">← Boxes</button><button data-next="final">Go to Final Challenge →</button></div>
+ </section>
+
+ <section class="panel" id="final" role="tabpanel" aria-labelledby="tab-final" style="--accent:#7655b8">
+  <div class="panel-head"><div class="number">✍</div><div><h2>Your final challenge</h2><p>Make a claim. Use evidence. Consider all sides.</p></div></div>
+  <article class="card">
+   <span class="tag">CULMINATING ASSIGNMENT</span>
+   <h2 style="font-size:clamp(1.5rem,4vw,2.2rem);line-height:1.2;margin:4px 0 12px">Did Globalization HELP or HARM people, the environment, and the economy in this clip?</h2>
+   <p>After completing all five readings and exploring NPR's <em>Planet Money Makes a T-Shirt</em>, write an evidence-based argument answering the essential question.</p>
+   <p><a href="https://apps.npr.org/tshirt/#/title" target="_blank" rel="noopener">Revisit the original NPR interactive ↗</a></p>
+  </article>
+  <div class="category-grid">
+   <div class="category"><h3>👥 People</h3><p>Workers, families, wages, safety, jobs, and consumers.</p></div>
+   <div class="category"><h3>🌎 Environment</h3><p>Pollution, natural resources, energy use, and waste.</p></div>
+   <div class="category"><h3>📈 Economy</h3><p>Jobs, businesses, trade, productivity, prices, and growth.</p></div>
+  </div>
+  <article class="card" style="margin-top:18px">
+   <h3>Build your argument</h3>
+   <div class="field"><label for="claim">1. My overall claim</label><textarea id="claim" placeholder="I believe globalization mostly helped / harmed / had mixed effects because..."></textarea></div>
+   <div class="field"><label for="peopleEvidence">2. Evidence about PEOPLE</label><textarea id="peopleEvidence" placeholder="One benefit or harm for workers, families, or consumers was... Evidence from the reading/NPR..."></textarea></div>
+   <div class="field"><label for="environmentEvidence">3. Evidence about the ENVIRONMENT</label><textarea id="environmentEvidence" placeholder="One environmental benefit or cost was... Evidence from the reading/NPR..."></textarea></div>
+   <div class="field"><label for="economyEvidence">4. Evidence about the ECONOMY</label><textarea id="economyEvidence" placeholder="One economic benefit or cost was... Evidence from the reading/NPR..."></textarea></div>
+   <div class="field"><label for="vocabEvidence">5. Use at least FIVE vocabulary terms</label><textarea id="vocabEvidence" placeholder="List and correctly use at least five essential vocabulary terms in your response."></textarea></div>
+   <div class="field"><label for="conclusion">6. Final reasoning: Which effects matter most, and why?</label><textarea id="conclusion" placeholder="Although globalization..., I conclude... because..."></textarea></div>
+   <div class="final-actions"><button class="primary" id="downloadBtn">Download my responses</button><button class="outline" id="printBtn">Print this assignment</button><button class="outline" id="clearBtn">Clear responses</button></div>
+   <p class="small">Your work is kept in this browser while you use this page. Download your responses before leaving or switching devices.</p>
+  </article>
+  <article class="card"><h3>Argument checklist</h3><div class="questions">
+   <div class="q"><label><input type="checkbox">I clearly answered the essential question.</label></div>
+   <div class="q"><label><input type="checkbox">I discussed people, the environment, and the economy.</label></div>
+   <div class="q"><label><input type="checkbox">I included at least three specific pieces of evidence from the readings or NPR interactive.</label></div>
+   <div class="q"><label><input type="checkbox">I correctly used at least five essential vocabulary terms.</label></div>
+   <div class="q"><label><input type="checkbox">I considered both benefits and harms before reaching my conclusion.</label></div>
+   <div class="q"><label><input type="checkbox">I explained why my evidence supports my conclusion.</label></div>
+  </div></article>
+ </section>
+ <footer>Created for classroom learning · Economics of Globalization · NYC<br>Original reporting, videos, and interactive belong to NPR's <a href="https://apps.npr.org/tshirt/#/title" target="_blank" rel="noopener">Planet Money Makes a T-Shirt</a> project. This classroom companion is not affiliated with NPR.</footer>
+</main>
+<script>
+const tabs=[...document.querySelectorAll('.tab')], panels=[...document.querySelectorAll('.panel')];
+function showTab(id){
+ panels.forEach(p=>p.classList.toggle('active',p.id===id));
+ tabs.forEach(t=>t.setAttribute('aria-selected',String(t.dataset.tab===id)));
+ const panel=document.getElementById(id); if(panel) panel.scrollIntoView({behavior:'smooth',block:'start'});
+}
+tabs.forEach(t=>t.addEventListener('click',()=>showTab(t.dataset.tab)));
+document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.next)));
+document.querySelectorAll('[data-prev]').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.prev)));
+document.querySelectorAll('.vocab button').forEach(b=>b.addEventListener('click',()=>{
+ const item=b.parentElement; item.classList.toggle('open'); b.querySelector('span').textContent=item.classList.contains('open')?'−':'＋';
+}));
+const readingIds=['cotton','machines','people','boxes','you'];
+function updateProgress(){
+ const done=readingIds.filter(id=>[...document.querySelectorAll(`#${id} .questions input[type=checkbox]`)].length>0 &&
+ [...document.querySelectorAll(`#${id} .questions input[type=checkbox]`)].every(c=>c.checked)).length;
+ document.getElementById('progressFill').style.width=(done/5*100)+'%';
+ document.getElementById('progressText').textContent=done+' of 5 readings completed';
+}
+document.querySelectorAll('.questions input[type=checkbox]').forEach(c=>c.addEventListener('change',updateProgress));
+const fields=['claim','peopleEvidence','environmentEvidence','economyEvidence','vocabEvidence','conclusion'];
+fields.forEach(id=>{
+ const el=document.getElementById(id);
+ el.addEventListener('input',()=>{try{localStorage.setItem('tshirt_'+id,el.value)}catch(e){}});
+ try{el.value=localStorage.getItem('tshirt_'+id)||''}catch(e){}
+});
+document.getElementById('downloadBtn').addEventListener('click',()=>{
+ const labels=['Overall claim','Evidence about people','Evidence about the environment','Evidence about the economy','Five vocabulary terms','Final reasoning'];
+ const text=fields.map((id,i)=>labels[i]+'\n'+(document.getElementById(id).value.trim()||'[No response entered]')).join('\n\n');
+ const blob=new Blob(['THE T-SHIRT PROJECT — STUDENT RESPONSES\n\n'+text],{type:'text/plain;charset=utf-8'});
+ const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='tshirt-globalization-responses.txt';a.click();URL.revokeObjectURL(url);
+});
+document.getElementById('printBtn').addEventListener('click',()=>window.print());
+document.getElementById('clearBtn').addEventListener('click',()=>{
+ if(confirm('Clear all final assignment responses saved in this browser?')){
+ fields.forEach(id=>{document.getElementById(id).value='';try{localStorage.removeItem('tshirt_'+id)}catch(e){}});
+ }
+});
+</script>
+</body>
+</html>
